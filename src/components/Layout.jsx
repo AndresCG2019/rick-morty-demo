@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -8,15 +8,11 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   NavbarText,
-} from 'reactstrap';
+} from "reactstrap";
 
 function Example(args) {
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,8 +20,13 @@ const navigate = useNavigate();
 
   return (
     <div>
-      <Navbar color='primary' dark={true} expand={"md"} {...args}>
-        <NavbarBrand style={{cursor: "pointer"}} onClick={() => navigate('/')}>Prueba Técnica</NavbarBrand>
+      <Navbar color="primary" dark={true} expand={"md"} {...args}>
+        <NavbarBrand
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/")}
+        >
+          Prueba Técnica
+        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
@@ -38,7 +39,7 @@ const navigate = useNavigate();
           <NavbarText>Andrés Castillo</NavbarText>
         </Collapse>
       </Navbar>
-      <Outlet/>
+      <Outlet />
     </div>
   );
 }
