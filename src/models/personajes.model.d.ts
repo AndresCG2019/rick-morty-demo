@@ -19,4 +19,5 @@ export interface personajeModel {
   episode: string[];
   url: string;
   created: string;
+  ordenVisto?: number;
 }

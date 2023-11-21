@@ -10,7 +10,7 @@ const ListadoPersonajes = (props: listadoPersonajesProps) => {
 
   const listGroupStyle: React.CSSProperties = {
     overflowY: "auto",
-    maxHeight: "70vh",
+    maxHeight: "60vh",
   };
 
   const listItemStyle: React.CSSProperties = {
@@ -20,7 +20,14 @@ const ListadoPersonajes = (props: listadoPersonajesProps) => {
 
   useEffect(() => {
     if (numeroPaginasMostrando.length == 0) {
-      setNumeroPaginasMostrando(obtenerPaginasTotal().slice(0, 5));
+      if (props.listaPersonajes?.results.length! >= 5) {
+        setNumeroPaginasMostrando(obtenerPaginasTotal().slice(0, 5));
+      } else {
+        setNumeroPaginasMostrando(
+          obtenerPaginasTotal().slice(0, props.listaPersonajes?.results.length)
+        );
+      }
+    } else {
     }
   }, [props.listaPersonajes]);
 
@@ -34,15 +41,28 @@ const ListadoPersonajes = (props: listadoPersonajesProps) => {
   }
 
   function isCurrentPage(pagina: number): boolean {
-    const urlSiguientePagina: string = props.listaPersonajes?.info.next!;
+    try {
+      const urlSiguientePagina: string = props.listaPersonajes?.info.next!;
+      const urlAnteriorPagina: string = props.listaPersonajes?.info.prev!;
 
-    const numeroSiguientePagina: number = Number(
-      urlSiguientePagina.match(/page=(\d+)/)![1]
-    );
+      if (urlSiguientePagina) {
+        const numeroSiguientePagina: number = Number(
+          urlSiguientePagina.match(/page=(\d+)/)![1]
+        );
 
-    const numeroPaginaActual: number = numeroSiguientePagina - 1;
+        const numeroPaginaActual: number = numeroSiguientePagina - 1;
+        return numeroPaginaActual == pagina;
+      } else {
+        const numeroAnteriorPagina: number = Number(
+          urlAnteriorPagina.match(/page=(\d+)/)![1]
+        );
 
-    return numeroPaginaActual == pagina;
+        const numeroPaginaActual: number = numeroAnteriorPagina + 1;
+        return numeroPaginaActual == pagina;
+      }
+    } catch (error) {
+      return false;
+    }
   }
 
   function onClickSiguiente() {
@@ -83,13 +103,14 @@ const ListadoPersonajes = (props: listadoPersonajesProps) => {
     <>
       {props.listaPersonajes ? (
         <>
+          {/* LIST ITEMS DE LOS PERSONAJES */}
           <ListGroup style={listGroupStyle}>
             {props.listaPersonajes.results.map((x) => (
               <ListGroupItem
                 style={{ cursor: "pointer" }}
                 action
-                href="#"
                 key={x.id}
+                onClick={() => props.onClickPersonaje(x.id) }
               >
                 <div className="fw-bold">{x.name}</div>
                 {x.location.name}
@@ -140,6 +161,7 @@ const ListadoPersonajes = (props: listadoPersonajesProps) => {
 interface listadoPersonajesProps {
   listaPersonajes?: listaPersonajesModel;
   onClickPage: (pagina: number) => void;
+  onClickPersonaje: (id: number) => void;
 }
 
 export default ListadoPersonajes;

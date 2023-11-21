@@ -31,7 +31,7 @@ function Example(args) {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">
+              <NavLink href="https://github.com/AndresCG2019">
                 GitHub
               </NavLink>
             </NavItem>
