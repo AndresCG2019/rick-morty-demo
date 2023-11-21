@@ -1,9 +1,7 @@
 import {
-  Button,
   Card,
   CardBody,
   CardSubtitle,
-  CardText,
   CardTitle,
   Modal,
   ModalBody,
@@ -42,7 +40,7 @@ const ModalDetallesPersonaje = (props: ModalProps) => {
   }, [props.personajeSeleccionado]);
 
   return (
-    <Modal isOpen={props.isOpen} toggle={props.toggle}>
+    <Modal isOpen={props.isOpen} toggle={props.toggle} scrollable>
       <ModalHeader toggle={props.toggle}></ModalHeader>
       <ModalBody>
         <div className="d-flex justify-content-center">

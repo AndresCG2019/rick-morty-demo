@@ -113,7 +113,7 @@ const Home = () => {
   return (
     <div className="container-fluid mt-3">
       <div className="row">
-        <div className="col">
+        <div className="col-12 col-md-6">
           <div className="row">
             <div className="col-12 col-md-8 mb-2">
               <Input
@@ -145,7 +145,7 @@ const Home = () => {
             onClickPersonaje={seleccionarPersonaje}
           />
         </div>
-        <div className="col mt-5">
+        <div className="col-12 col-md-6 mt-5">
           <h2>Últimos vistos</h2>
           <UltimosVistos
             listaPersonajes={ultimosPersonajesVistos}
